@@ -1,11 +1,11 @@
 {
-  "name": "svg2image",
+  "name": "svg2img",
   "version": "0.1.0",
   "description": "A fast, 100% node convertor from svg to png/jpeg images. ",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FuZhenn/node-svg2image"
+    "url": "https://github.com/FuZhenn/node-svg2img"
   },
   "main": "index.js",
   "devDependencies": {
