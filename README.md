@@ -37,7 +37,8 @@ svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', 
     });
 
 //5. convert to jpeg file
-svg2img(svgString, {format:'jpg'}, function(error, buffer) {
+svg2img(svgString, {format:'jpg','quality':75}, function(error, buffer) {
+    //default quality is 75
     fs.writeFileSync('foo.jpg', buffer);
     });
 ```
