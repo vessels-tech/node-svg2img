@@ -13,7 +13,7 @@ var canvg = require('canvg'),
  * @param  {Object} [options.format=png]    - format of the image: png or jpeg, default is png
  * @param  {Function} callback - result callback, 2 parameters: error, and result buffer in png
  */
-function svg2image(svg, options, callback) {
+function svg2img(svg, options, callback) {
     loadSVGContent(svg, function(error, content) {
         if (error) {
             callback(error);
@@ -96,5 +96,5 @@ function loadRemoteImage(url, onComplete) {
 }
 
 
-exports = module.exports = svg2image;
+exports = module.exports = svg2img;
 
