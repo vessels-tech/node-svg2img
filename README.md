@@ -32,7 +32,8 @@ svg2img(__dirname+'/foo.svg', {format:'png'}, function(error, buffer) {
     });
 
 //4. convert from a remote file
-svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', {format:'png'}, function(error, buffer) {
+svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', 
+{format:'png'}, function(error, buffer) {
     fs.writeFileSync('foo.png', buffer);
     });
 
