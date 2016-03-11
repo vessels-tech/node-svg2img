@@ -22,8 +22,11 @@ svg2img(svgString, {format:'png'}, function(error, buffer) {
 });
 
 //2. convert from svg's base64 string
-svg2img(atob(svgString), {format:'png'}, function(error, buffer) {
-    fs.writeFileSync('foo.png', buffer);
+svg2img(
+    'data:image/svg+xml;base64,'+ btoa(svgString), 
+    {format:'png'}, 
+    function(error, buffer) {
+        fs.writeFileSync('foo.png', buffer);
 });
 
 //3. convert from a local file
