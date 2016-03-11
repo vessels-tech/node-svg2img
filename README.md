@@ -1,5 +1,5 @@
 # node-svg2img
-100% in Node, fast convert SVG files to PNG/JPEG image in memory.
+A high-performance in-memory convertor to convert svg to png/jpeg images for Node.
 Based on [canvg](https://github.com/gabelerner/canvg) and [node-canvas](https://github.com/Automattic/node-canvas)
 
 Please notice: this library is only for Node, can not run in browsers.
@@ -24,7 +24,7 @@ var svgString = [
 
 //1. convert from svg string
 svg2img(svgString, function(error, buffer) {
-    //a Buffer
+    //returns a Buffer
     fs.writeFileSync('foo.png', buffer);
 });
 
