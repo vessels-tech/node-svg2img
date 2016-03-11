@@ -19,29 +19,31 @@ var svgString = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23
 svg2img(svgString, {format:'png'}, function(error, buffer) {
     //a Buffer
     fs.writeFileSync('foo.png', buffer);
-    });
+});
 
 //2. convert from svg's base64 string
 svg2img(atob(svgString), {format:'png'}, function(error, buffer) {
     fs.writeFileSync('foo.png', buffer);
-    });
+});
 
 //3. convert from a local file
 svg2img(__dirname+'/foo.svg', {format:'png'}, function(error, buffer) {
     fs.writeFileSync('foo.png', buffer);
-    });
+});
 
 //4. convert from a remote file
-svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', 
-{format:'png'}, function(error, buffer) {
-    fs.writeFileSync('foo.png', buffer);
-    });
+svg2img(
+    'https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', 
+    {format:'png'}, 
+    function(error, buffer) {
+        fs.writeFileSync('foo.png', buffer);
+});
 
 //5. convert to jpeg file
 svg2img(svgString, {format:'jpg','quality':75}, function(error, buffer) {
     //default quality is 75
     fs.writeFileSync('foo.jpg', buffer);
-    });
+});
 ```
 
 ## Run the Test
