@@ -14,6 +14,10 @@ var canvg = require('canvg'),
  * @param  {Function} callback - result callback, 2 parameters: error, and result buffer in png
  */
 function svg2img(svg, options, callback) {
+    if (isFunction(options)) {
+        callback = options;
+        options = null;
+    }
     loadSVGContent(svg, function(error, content) {
         if (error) {
             callback(error);
@@ -95,6 +99,12 @@ function loadRemoteImage(url, onComplete) {
     }).on('error', onComplete);
 }
 
+function isFunction(func) {
+    if (!func) {
+        return false;
+    }
+    return typeof func === 'function' || (func.constructor!==null && func.constructor == Function);
+}
 
 exports = module.exports = svg2img;
 

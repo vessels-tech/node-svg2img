@@ -4,7 +4,7 @@ var svg2img = require('../index'),
     fs = require('fs');
 describe('Convert SVG', function () {
     it('convert a svg file to png',function(done) {
-        svg2img(__dirname+'/ph.svg', null ,function(error, data) {
+        svg2img(__dirname+'/ph.svg', function(error, data) {
             expect(error).not.to.be.ok();
             expect(Buffer.isBuffer(data)).to.be.ok();
             expect(data.length).to.be.above(0);
@@ -13,7 +13,7 @@ describe('Convert SVG', function () {
     });
 
     it('convert tiger file to png',function(done) {
-        svg2img(__dirname+'/tiger.svg', null ,function(error, data) {
+        svg2img(__dirname+'/tiger.svg', function(error, data) {
             expect(error).not.to.be.ok();
             expect(Buffer.isBuffer(data)).to.be.ok();
             expect(data.length).to.be.above(0);
@@ -22,7 +22,7 @@ describe('Convert SVG', function () {
     });
 
     it('convert a remote svg file to png',function(done) {
-        svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', null ,function(error, data) {
+        svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', function(error, data) {
             expect(error).not.to.be.ok();
             expect(Buffer.isBuffer(data)).to.be.ok();
             expect(data.length).to.be.above(0);
