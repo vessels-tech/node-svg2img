@@ -102,6 +102,7 @@ function scale(svgContent, w, h) {
     if (!props['viewBox']) {
         props['viewBox'] = '"'+[0,0,ow?ow:w,oh?oh:h].join(' ')+'"';
     }
+    props['preserveAspectRatio'] = '"none"';
     var newSvgTag = ['<svg'];
     for (var p in props) {
         newSvgTag.push(p+'='+props[p]);
