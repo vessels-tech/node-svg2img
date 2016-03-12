@@ -11,7 +11,7 @@ npm install svg2img
 ```
 
 ## Usage
-
+### Conversion
 ```javascript
 var svg2img = require('svg2img');
 
@@ -51,6 +51,14 @@ svg2img(
 svg2img(svgString, {format:'jpg','quality':75}, function(error, buffer) {
     //default jpeg quality is 75
     fs.writeFileSync('foo.jpg', buffer);
+});
+```
+
+### Scale
+You can scale the svg by giving width and height.
+```javascript
+svg2img(__dirname+'/foo.svg', {'width':800, 'height':600} ,function(error, buffer) {
+    fs.writeFileSync('foo.png', buffer);
 });
 ```
 
