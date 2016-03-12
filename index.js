@@ -5,7 +5,6 @@ var canvg = require('canvg'),
     https = require('https'),
     Canvas = require('canvas');
 
-
 /**
  * Main method
  * @param  {String}   svg      - a svg string, or a base64 string starts with "data:image/svg+xml;base64", or a file url (http or local)
@@ -18,12 +17,16 @@ function svg2img(svg, options, callback) {
         callback = options;
         options = null;
     }
+    if (!options) {
+        options = {};
+    }
     loadSVGContent(svg, function(error, content) {
         if (error) {
             callback(error);
             return;
         }
-        var format = options?options.format:null;
+        content = scale(content, options.width, options.height);
+        var format = options.format;
         if (!format) {
             format = 'png';
         }
@@ -54,6 +57,54 @@ function convert(svgContent) {
     var canvas = new Canvas();
     canvg(canvas, svgContent, { ignoreMouse: true, ignoreAnimation: true });
     return canvas;
+}
+
+function scale(svgContent, w, h) {
+    var index = svgContent.indexOf('<svg');
+    var svgTag = [];
+    var endIndex = index;
+    for (var i = index; i < svgContent.length; i++) {
+        var char = svgContent.charAt(i);
+        svgTag.push(char);
+        if (char === '>') {
+          endIndex = i;
+          break;
+        }
+    }
+    svgTag = svgTag.join('').replace(/\n/g, ' ').replace(/\r/g, '');
+    var props = {};
+    var splits = svgTag.substring(4, svgTag.length-1).split(' ');
+    var lastKey;
+    for (var i = 0; i < splits.length; i++) {
+        if (splits[i] === '') {
+            continue;
+        } else {
+            if (splits[i].indexOf('=') < 0) {
+                props[lastKey] = props[lastKey]+' '+splits[i];
+            } else {
+                var keyvalue = splits[i].split('=');
+                lastKey = keyvalue[0];
+                props[lastKey] = keyvalue[1];
+            }
+        }
+    }
+    var ow = parseInt(props['width'], 10),
+        oh = parseInt(props['height'], 10);
+    if (w) {
+        props['width'] = '"'+w+'"';
+    }
+    if (h) {
+        props['height'] = '"'+h+'"';
+    }
+    if (!props['viewBox']) {
+        props['viewBox'] = [0,0,ow?ow:w,oh?oh:h].join(' ');
+    }
+    var newSvgTag = ['<svg'];
+    for (var p in props) {
+        newSvgTag.push(p+'='+props[p]);
+    }
+    newSvgTag.push('>');
+    return svgContent.substring(0, index)+newSvgTag.join(' ')+svgContent.substring(endIndex+1);
 }
 
 function loadSVGContent(svg, callback) {
