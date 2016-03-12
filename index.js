@@ -25,7 +25,10 @@ function svg2img(svg, options, callback) {
             callback(error);
             return;
         }
-        content = scale(content, options.width, options.height);
+        if (options.width || options.height) {
+            content = scale(content, options.width, options.height);
+        }
+        fs.writeFileSync('scale.svg', new Buffer(content));
         var format = options.format;
         if (!format) {
             format = 'png';
@@ -88,8 +91,8 @@ function scale(svgContent, w, h) {
             }
         }
     }
-    var ow = parseInt(props['width'], 10),
-        oh = parseInt(props['height'], 10);
+    var ow = parseInt(props['width'].replace('"',''), 10),
+        oh = parseInt(props['height'].replace('"',''), 10);
     if (w) {
         props['width'] = '"'+w+'"';
     }
@@ -97,7 +100,7 @@ function scale(svgContent, w, h) {
         props['height'] = '"'+h+'"';
     }
     if (!props['viewBox']) {
-        props['viewBox'] = [0,0,ow?ow:w,oh?oh:h].join(' ');
+        props['viewBox'] = '"'+[0,0,ow?ow:w,oh?oh:h].join(' ')+'"';
     }
     var newSvgTag = ['<svg'];
     for (var p in props) {
