@@ -1,4 +1,7 @@
 # node-svg2img
+
+[![Circle CI](https://circleci.com/gh/FuZhenn/tiler-arcgis-compact.svg?style=svg)](https://circleci.com/gh/FuZhenn/tiler-arcgis-compact)
+
 A high-performance in-memory convertor to convert svg to png/jpeg images for Node.
 Based on [canvg](https://github.com/gabelerner/canvg) and [node-canvas](https://github.com/Automattic/node-canvas)
 
