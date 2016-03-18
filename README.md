@@ -20,6 +20,7 @@ npm install svg2img
 ```javascript
 var fs = require('fs');
 var svg2img = require('svg2img');
+var btoa = require('btoa');
 
 var svgString = [
 '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="236" height="120" ',
