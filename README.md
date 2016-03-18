@@ -67,5 +67,5 @@ svg2img(__dirname+'/foo.svg', {'width':800, 'height':600} ,function(error, buffe
 
 ## Run the Test
 ```bash
-    gulp test
+    npm test
 ```
