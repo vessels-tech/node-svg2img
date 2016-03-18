@@ -27,8 +27,7 @@ function svg2img(svg, options, callback) {
         }
         if (options.width || options.height) {
             content = scale(content, options.width, options.height);
-        }
-        fs.writeFileSync('scale.svg', new Buffer(content));
+        }        
         var format = options.format;
         if (!format) {
             format = 'png';
