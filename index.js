@@ -91,8 +91,8 @@ function scale(svgContent, w, h) {
             }
         }
     }
-    var ow = parseInt(props['width'].replace('"',''), 10),
-        oh = parseInt(props['height'].replace('"',''), 10);
+    var ow = props['width'] ? parseInt(props['width'].replace('"',''), 10) : null,
+        oh = props['height'] ? parseInt(props['height'].replace('"',''), 10) : null;
     if (w) {
         props['width'] = '"'+w+'"';
     }
