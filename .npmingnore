@@ -1,5 +1,5 @@
 test/
 .vscode/
 circle.yml
-foo1.png
 test.js
+*.png
