@@ -17,6 +17,9 @@ npm install svg2img
 
 ## Usage
 ### Conversion
+
+To output JPEG image, you should install `node-canvas` with jpeg support.
+
 ```javascript
 var fs = require('fs');
 var svg2img = require('svg2img');
