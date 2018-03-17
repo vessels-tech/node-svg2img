@@ -53,7 +53,7 @@ describe('Convert SVG', function () {
         })
     });
 
-    it.skip('convert a svg string to jpg',function(done) {
+    it('convert a svg string to jpg',function(done) {
         var svg = fs.readFileSync(__dirname+'/ph.svg');
         svg2img(svg, {format:'jpeg'} ,function(error, data) {
             expect(error).not.to.be.ok();
