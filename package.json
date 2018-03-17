@@ -1,6 +1,6 @@
 {
   "name": "svg2img",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "A high-performance in-memory convertor to convert svg to png/jpeg images for Node. ",
   "license": "MIT",
   "repository": {
