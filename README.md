@@ -40,7 +40,7 @@ svg2img(svgString, function(error, buffer) {
 
 //2. convert from svg's base64 string
 svg2img(
-    'data:image/svg+xml;base64,'+ btoa(svgString), 
+    'data:image/svg+xml;base64,'+ btoa(svgString),
     function(error, buffer) {
         fs.writeFileSync('foo2.png', buffer);
 });
@@ -54,7 +54,7 @@ svg2img(__dirname+'/foo.svg', function(error, buffer) {
 
 //4. convert from a remote file
 svg2img(
-    'https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', 
+    'https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg',
     function(error, buffer) {
         fs.writeFileSync('foo4.png', buffer);
 });
@@ -72,6 +72,27 @@ You can scale the svg by giving width and height.
 svg2img(__dirname+'/foo.svg', {'width':800, 'height':600} ,function(error, buffer) {
     fs.writeFileSync('foo.png', buffer);
 });
+```
+
+By default, the aspect ratio isn't preserved when scaling (same as `preserveAspectRatio="none"`). You can change it using `preserveAspectRatio` option. It can be `true` to keep original value or any other value to replace with.
+```javascript
+// use original preserveAspectRatio
+svg2img(
+    __dirname+'/foo.svg',
+    {width:800, height:600, preserveAspectRatio:true},
+    function(error, buffer) {
+        fs.writeFileSync('foo.png', buffer);
+    }
+);
+
+// use custom preserveAspectRatio
+svg2img(
+    __dirname+'/foo.svg',
+    {width:800, height:600, preserveAspectRatio:'xMinYMid meet'},
+    function(error, buffer) {
+        fs.writeFileSync('foo.png', buffer);
+    }
+);
 ```
 
 ## Run the Test
