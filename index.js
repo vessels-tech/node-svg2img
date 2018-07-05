@@ -26,7 +26,7 @@ function svg2img(svg, options, callback) {
             return;
         }
         if (options.width || options.height) {
-            content = scale(content, options.width, options.height);
+            content = scale(content, options.width, options.height, options.preserveAspectRatio);
         }
         var format = options.format;
         if (!format) {
@@ -61,7 +61,7 @@ function convert(svgContent) {
     return canvas;
 }
 
-function scale(svgContent, w, h) {
+function scale(svgContent, w, h, preserveAspectRatio) {
     var index = svgContent.indexOf('<svg');
     var svgTag = [];
     var endIndex = index;
@@ -74,6 +74,17 @@ function scale(svgContent, w, h) {
         }
     }
     svgTag = svgTag.join('').replace(/\n/g, ' ').replace(/\r/g, '');
+    var originalAspectRatio;
+    if (preserveAspectRatio && / preserveAspectRatio\W/.test(svgContent)) {
+        var quoChar = svgTag.match(/ preserveAspectRatio\s*=\s*(['"])/);
+        if (quoChar) {
+            quoChar = quoChar[1];
+            var aspectRatio = svgTag.match(new RegExp(' preserveAspectRatio\\s*=\\s*' + quoChar + '([^' + quoChar + ']*)'));
+            if (aspectRatio && aspectRatio[1]) {
+                originalAspectRatio = aspectRatio[1].replace(/^\s*(\S.*\S)\s*$/, '"$1"');
+            }
+        }
+    }
     var props = {};
     var splits = svgTag.substring(4, svgTag.length-1).split(' ');
     var lastKey;
@@ -102,7 +113,7 @@ function scale(svgContent, w, h) {
     if (!props['viewBox']) {
         props['viewBox'] = '"'+[0,0,ow?ow:w,oh?oh:h].join(' ')+'"';
     }
-    props['preserveAspectRatio'] = '"none"';
+    props['preserveAspectRatio'] = originalAspectRatio || '"none"';
 
     // update width and height in style attribute
     if (props['style'] && props['style'].length > 2) {
