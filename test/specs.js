@@ -33,6 +33,15 @@ describe('Convert SVG', function () {
         })
     });
 
+    it('convert a svg file and scale it, keep preserveAspectRatio',function(done) {
+        svg2img(__dirname+'/ph.svg', {'width':400, 'height':400, preserveAspectRatio:true}, function(error, data) {
+            expect(error).not.to.be.ok();
+            expect(Buffer.isBuffer(data)).to.be.ok();
+            expect(data.length).to.be.above(0);
+            done();
+        })
+    });
+
     it('convert a remote svg file to png',function(done) {
         this.timeout(5000);
         svg2img('https://upload.wikimedia.org/wikipedia/commons/a/a0/Svg_example1.svg', function(error, data) {
@@ -76,7 +85,7 @@ describe('Convert SVG', function () {
 
     it('convert a svg with an image', function (done) {
         var imageUrl = 'https://zh.wikipedia.org/static/images/project-logos/zhwiki-hans.png';
-        Image64.encode(imageUrl, {}, function (err, base64) {            
+        Image64.encode(imageUrl, {}, function (err, base64) {
             var svgString = util.format('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="540" height="258" ' +
                 'viewBox="0 0 540 258"><image width="540" height="258" x="0" y="0" href="%s"></image></svg>', 'data:image/png;base64,' + base64.toString('base64'));
             svg2img(svgString, function(error, data) {
