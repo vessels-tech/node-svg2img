@@ -84,6 +84,7 @@ describe('Convert SVG', function () {
     });
 
     it('convert a svg with an image', function (done) {
+        this.timeout(5000);
         var imageUrl = 'https://zh.wikipedia.org/static/images/project-logos/zhwiki-hans.png';
         Image64.encode(imageUrl, {}, function (err, base64) {
             var svgString = util.format('<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="540" height="258" ' +

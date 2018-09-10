@@ -56,7 +56,7 @@ function svg2img(svg, options, callback) {
 }
 
 function convert(svgContent) {
-    var canvas = new Canvas();
+    var canvas = Canvas.createCanvas();
     canvg(canvas, svgContent, { ignoreMouse: true, ignoreAnimation: true, ImageClass: Canvas.Image });
     return canvas;
 }
